@@ -18,7 +18,7 @@ function ThemeDisplayer() {
 
   return (
     <>
-      <div className="text-2xl cursor-pointer" onClick={changeTheme}>
+      <div className="text-[25px] cursor-pointer" onClick={changeTheme}>
         {systemTheme === theme ? (
           <DarkThemeIcon></DarkThemeIcon>
         ) : (
