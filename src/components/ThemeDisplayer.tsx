@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { DarkThemeIcon, LightThemeIcon } from "./svgs";
+import { DarkThemeIcon, LightThemeIcon } from "../../public/svgs";
 import { useTheme } from "next-themes";
 
 function ThemeDisplayer() {
@@ -8,9 +8,9 @@ function ThemeDisplayer() {
 
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) return null;
-
   const { systemTheme, theme, setTheme } = useTheme();
+
+  if (!mounted) return null;
 
   const changeTheme = () => {
     systemTheme === theme ? setTheme("light") : setTheme("dark");

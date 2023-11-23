@@ -1,5 +1,7 @@
 import createIntlMiddleware from "next-intl/middleware";
 import { NextRequest } from "next/server";
+import { generateUniqueNumbers } from "./utils/generateUniqueNumbers";
+import { useCompressor } from "./utils/compressor";
 
 export default async function middleware(request: NextRequest) {
   const defaultLocale = request.headers.get("x-default-locale") || "en";
@@ -11,6 +13,20 @@ export default async function middleware(request: NextRequest) {
 
   if (!request.nextUrl.search.includes("algh")) {
     request.nextUrl.searchParams.set("algh", "bubble");
+  }
+
+  if (!request.nextUrl.search.includes("sort")) {
+    request.nextUrl.searchParams.set("sort", "ASC");
+  }
+
+  if (!request.nextUrl.search.includes("data")) {
+    const { compress } = useCompressor();
+
+    const numberOfUniqueNumbers = 8;
+    const data = generateUniqueNumbers(numberOfUniqueNumbers);
+
+    const compressedData = await compress(data);
+    request.nextUrl.searchParams.set("data", compressedData);
   }
 
   const response = handleI18nRouting(request);
