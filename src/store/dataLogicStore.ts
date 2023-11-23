@@ -1,40 +1,32 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { ArraysSlice, createArraysSlice } from "./createArraysSlice";
+import { VariablesSlice, createVariablesSlice } from "./createVariablesSlice";
+import { IndexSlice, createIndexSlice } from "./createIndexSlice";
 
 type DataLogicStore = {
-  index: number;
-  setIndex: (index: number) => void;
-  speed: number;
-  setSpeed: (speed: number) => void;
-  isPaused: boolean;
-  setIsPaused: (isPaused: boolean) => void;
-  highLightArr: number[];
-  setHighLightArr: (highLightArr: number[]) => void;
-  lastPositionArr: number[];
-  setLastPositionArr: (lastPositionArr: number[]) => void;
-  isFinished: boolean;
-  setIsFinished: (isFinished: boolean) => void;
-  animationCycles: number;
-  setAnimationCycles: (animationCycles: number) => void;
   cleanUp: () => void;
+  getNewestValues: () => {
+    index: number;
+    animationCycles: number;
+    isPaused: boolean;
+    lastPositionArr: number[];
+  };
 };
 
-export const useDataLogic = create<DataLogicStore>()(
-  devtools((set) => ({
-    index: 0,
-    setIndex: (index: number) => set({ index }),
-    speed: 110,
-    setSpeed: (speed: number) => set({ speed }),
-    isPaused: true,
-    setIsPaused: (isPaused: boolean) => set({ isPaused }),
-    highLightArr: [],
-    setHighLightArr: (highLightArr: number[]) => set({ highLightArr }),
-    lastPositionArr: [],
-    setLastPositionArr: (lastPositionArr: number[]) => set({ lastPositionArr }),
-    isFinished: false,
-    setIsFinished: (isFinished: boolean) => set({ isFinished }),
-    animationCycles: 0,
-    setAnimationCycles: (animationCycles: number) => set({ animationCycles }),
+export const useDataLogic = create<
+  DataLogicStore & ArraysSlice & VariablesSlice & IndexSlice
+>()(
+  devtools((set, get, _) => ({
+    ...createIndexSlice(set, get, _),
+    ...createVariablesSlice(set, get, _),
+    ...createArraysSlice(set, get, _),
+    getNewestValues: () => ({
+      index: get().index,
+      animationCycles: get().animationCycles,
+      isPaused: get().isPaused,
+      lastPositionArr: get().lastPositionArr,
+    }),
     cleanUp: () =>
       set({
         index: 0,
