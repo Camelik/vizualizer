@@ -4,7 +4,8 @@ import { quickFn } from "./quickSort";
 
 export const getSortingCache = (
   data: number[],
-  alghType: "bubble" | "sort" | "quick"
+  alghType: "bubble" | "sort" | "quick",
+  sortOrder: "ASC" | "DESC" = "ASC"
 ) => {
   const alghFn = {
     bubble: bubbleFn,
@@ -12,5 +13,5 @@ export const getSortingCache = (
     quick: quickFn,
   };
 
-  return alghFn[alghType](data);
+  return alghFn[alghType](data, sortOrder);
 };
