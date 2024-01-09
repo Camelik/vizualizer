@@ -1,6 +1,7 @@
-import { bubbleFn } from "./bubbleSort";
-import { mergeFn } from "./mergeSort";
-import { quickFn } from "./quickSort";
+// import { bubbleFn } from "./bubbleSort";
+import { bubbleFn } from "./bubbleSort/stepsGenerator";
+import { mergeFn } from "./mergeSort/stepsGenerator";
+import { quickFn } from "./quickSort/stepsGenerator";
 
 export const getSortingCache = (
   data: number[],
