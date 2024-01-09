@@ -11,6 +11,7 @@ type DataLogicStore = {
     animationCycles: number;
     isPaused: boolean;
     lastPositionArr: number[];
+    isAnimated: boolean;
   };
 };
 
@@ -26,6 +27,7 @@ export const useDataLogic = create<
       animationCycles: get().animationCycles,
       isPaused: get().isPaused,
       lastPositionArr: get().lastPositionArr,
+      isAnimated: get().isAnimated,
     }),
     cleanUp: () =>
       set({

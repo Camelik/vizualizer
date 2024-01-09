@@ -7,6 +7,9 @@ export type VariablesSlice = {
   setIsPaused: (isPaused: boolean) => void;
   getIsPaused: () => boolean;
   isFinished: boolean;
+  isAnimated: boolean;
+  setIsAnimated: (isAnimated: boolean) => void;
+  getIsAnimated: () => boolean;
   setIsFinished: (isFinished: boolean) => void;
   animationCycles: number;
   setAnimationCycles: (animationCycles: number) => void;
@@ -23,6 +26,9 @@ export const createVariablesSlice: StateCreator<VariablesSlice> = (
   setIsPaused: (isPaused: boolean) => set({ isPaused }),
   getIsPaused: () => get().isPaused,
   isFinished: false,
+  isAnimated: false,
+  setIsAnimated: (isAnimated: boolean) => set({ isAnimated }),
+  getIsAnimated: () => get().isAnimated,
   setIsFinished: (isFinished: boolean) => set({ isFinished }),
   animationCycles: 0,
   setAnimationCycles: (animationCycles: number) => set({ animationCycles }),
