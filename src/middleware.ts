@@ -19,6 +19,10 @@ export default async function middleware(request: NextRequest) {
     request.nextUrl.searchParams.set("sort", "ASC");
   }
 
+  if (!request.nextUrl.search.includes("code")) {
+    request.nextUrl.searchParams.set("code", "js");
+  }
+
   if (!request.nextUrl.search.includes("data")) {
     const { compress } = useCompressor();
 
